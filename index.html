@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    date:
+    <input id="date" type="date" onchange="onChangeInput(this)"/>
+    time:
+    <input id="time" type="time" onchange="onChangeInput(this)"/>
+    <div>
+        <div id="div1"></div>
+    </div>
+
+    <script>
+
+
+        function getUnixFromDateTimeInput(date_input, time_input) {
+            var datetime = date_input + "T" + time_input + ":00";
+            var d = new Date(datetime);
+            return Math.floor(d.getTime() / 1000);
+        };
+        
+        function set(id, content) {
+            document.getElementById(id).innerHTML = content;
+        }
+
+        var elDate = document.getElementById("date")
+        var elTime = document.getElementById("time")
+        function onChangeInput(e){
+            console.log(e.value);
+
+            let content = `
+            Date : ${elDate.value}<br>
+            Time:${elTime.value}<br>
+            Unix : ${getUnixFromDateTimeInput(elDate.value, elTime.value)}
+            `
+
+            set("div1", content)
+        }
+
+
+        
+
+        set("div1", getUnixFromDateTimeInput("2020-01-03","10:59"));
+ 
+    </script>
+</body>
+
+</html>
